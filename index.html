@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frontend Mentor | Calculator app">
+
+  <title>Frontend Mentor | Calculator app</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="theme-3">
+  <main class="calculator">
+    <!-- Header -->
+    <header class="calculator__header container">
+      <a href="#" class="calculator__brand">calc</a>
+
+      <div class="theme-switcher">
+        <label for="theme-range" class="theme-switcher__label">Theme</label>
+
+        <div class="theme-switcher__control">
+          <div class="theme-switcher__labels">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </div>
+          <input type="range" name="theme" id="theme-range" class="js-theme-switcher" value="0" max="100" step="50"
+            aria-label="Theme switcher" />
+        </div>
+      </div>
+    </header>
+
+    <!-- Display -->
+    <section class="calculator__display container">
+      <output class="calculator__expression" aria-label="Expression">349839 x 302830</output>
+      <output class="calculator__result js-display" aria-label="Result">399,981</output>
+    </section>
+
+    <!-- Keypad -->
+    <section class="calculator__keypad container">
+      <div class="keypad">
+        <button class="keypad__btn js-key" data-index="0">7</button>
+        <button class="keypad__btn js-key" data-index="1">8</button>
+        <button class="keypad__btn js-key" data-index="2">9</button>
+        <button class="keypad__btn keypad__btn--del js-del" data-index="3">DEL</button>
+
+        <button class="keypad__btn js-key" data-index="4">4</button>
+        <button class="keypad__btn js-key" data-index="5">5</button>
+        <button class="keypad__btn js-key" data-index="6">6</button>
+        <button class="keypad__btn js-key" data-index="7">+</button>
+
+        <button class="keypad__btn js-key" data-index="8">1</button>
+        <button class="keypad__btn js-key" data-index="9">2</button>
+        <button class="keypad__btn js-key" data-index="10">3</button>
+        <button class="keypad__btn js-key" data-index="11">-</button>
+
+        <button class="keypad__btn js-key" data-index="12">.</button>
+        <button class="keypad__btn js-key" data-index="13">0</button>
+        <button class="keypad__btn js-key" data-index="14">/</button>
+        <button class="keypad__btn js-key" data-index="15">x</button>
+
+        <button class="keypad__btn keypad__btn--reset js-reset" data-index="16">RESET</button>
+        <button class="keypad__btn keypad__btn--equal js-equal" data-index="17">=</button>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer container">
+    <p>
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/arisdwii">arisdwii</a>.
+    </p>
+  </footer>
+</body>
+
+</html>
