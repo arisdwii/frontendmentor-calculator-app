@@ -92,7 +92,7 @@ body.theme-3 {
 
 .container {
   width: 90%;
-  max-width: 500px;
+  max-width: 450px;
   margin-inline: auto;
 }
 
@@ -113,20 +113,66 @@ body.theme-3 {
 .theme-switcher {
   display: flex;
   align-items: end;
+  gap: 1em;
 }
 
 .theme-switcher__label {
   text-transform: uppercase;
   font-weight: 700;
-  font-weight: 0.75rem;
-  letter-spacing: 1px;
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.25em;
 }
 
 .theme-switcher__labels {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   font-weight: 500;
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+}
+
+.js-theme-switcher {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--bg-toggle);
+  cursor: pointer;
+  width: 70px;
+  height: 26px;
+  border-radius: 100px;
+  padding: 5px;
+  vertical-align: bottom;
+}
+
+.js-theme-switcher::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: var(--key-bg-red);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.js-theme-switcher::-webkit-slider-thumb:hover {
+  background-color: hsl(6, 63%, 58%);
+}
+
+body.theme-2 .js-theme-switcher::-webkit-slider-thumb {
+  background-color: var(--key-bg-orange);
+}
+
+body.theme-2 .js-theme-switcher::-webkit-slider-thumb:hover {
+  background-color: hsl(25, 98%, 50%);
+}
+
+body.theme-3 .js-theme-switcher::-webkit-slider-thumb {
+  background-color: var(--key-bg-cyan);
+}
+
+body.theme-3 .js-theme-switcher::-webkit-slider-thumb:hover {
+  background-color: hsl(176, 100%, 54%);
 }
 
 .calculator__display,
@@ -149,7 +195,7 @@ body.theme-3 {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 0.5em;
-  opacity: 0;
+  opacity: 1;
 }
 
 .calculator__result {
@@ -180,7 +226,7 @@ body.theme-2 .calculator__keypad {
   background-color: var(--key-bg-light);
   color: var(--text-dark);
   box-shadow: 0 4px 0 0 var(--key-shadow-light);
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
 .keypad__btn:hover {
@@ -288,4 +334,25 @@ body.theme-3 .keypad__btn--equal:hover {
 
 .site-footer a {
   color: inherit;
+}
+
+@media (min-width: 1024px) {
+  .calculator__header {
+    margin-bottom: 1.5em;
+  }
+
+  .calculator__result {
+    font-size: 2.5rem;
+  }
+
+  .keypad__btn {
+    font-size: 1.8rem;
+    height: 50px;
+  }
+
+  .keypad__btn--del,
+  .keypad__btn--reset,
+  .keypad__btn--equal {
+    font-size: 1.25rem;
+  }
 }
