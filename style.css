@@ -183,19 +183,12 @@ body.theme-3 .js-theme-switcher::-webkit-slider-thumb:hover {
 }
 
 .calculator__display {
-  height: 100px;
+  height: 80px;
   padding-right: 1.4em;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: end;
-}
-
-.calculator__expression {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.5em;
-  opacity: 1;
 }
 
 .calculator__result {

@@ -1,131 +1,70 @@
+// Select DOM elements
 const themeSwitcher = document.querySelector(".js-theme-switcher");
+const resultEl = document.querySelector(".js-display");
+const keys = document.querySelectorAll(".js-key");
+const delBtn = document.querySelector(".js-del");
+const resetBtn = document.querySelector(".js-reset");
+const equalBtn = document.querySelector(".js-equal");
+
+// Initialize expressions for display and calculation
+let expressionDisplay = "";
+let expressionCalc = "";
 
 themeSwitcher.addEventListener("change", () => {
-  const val = Number(themeSwitcher.value);
+  const themeValue = Number(themeSwitcher.value);
 
+  // Remove existing themes
   document.body.classList.remove("theme-1", "theme-2", "theme-3");
 
-  switch (val) {
-    case 50:
-      document.body.classList.add("theme-2");
-      break;
-    case 100:
-      document.body.classList.add("theme-3");
-      break;
-    default:
-      document.body.classList.add("theme-1");
-      break;
-  }
+  // Add selected theme
+  const themes = {
+    50: "theme-2",
+    100: "theme-3",
+  };
+
+  document.body.classList.add(themes[themeValue] || "theme-1");
 });
 
-const keys = document.querySelectorAll(".js-key");
-const resetBtn = document.querySelector(".js-reset");
-const delBtn = document.querySelector(".js-del");
-const equalBtn = document.querySelector(".js-equal");
-const expressionEl = document.querySelector(".js-expression");
-const resultEl = document.querySelector(".js-display");
-const displayContainer = document.querySelector(".calculator__display");
-
-let currentInput = "";
-let previousInput = "";
-let operator = "";
-
+// Handle key clicks
 keys.forEach((key) => {
   key.addEventListener("click", () => {
     const value = key.textContent;
-    pressKey(key);
 
-    if (!isNaN(value) || value === ".") {
-      handleNumber(value);
-    } else {
-      handleOperator(value);
-    }
+    // Append value to display expression
+    expressionDisplay += value;
 
-    updateDisplay();
+    // Append correct value to calculation expression
+    expressionCalc += value === "x" ? "*" : value;
+
+    // Update display
+    resultEl.value = expressionDisplay;
   });
 });
 
-resetBtn.addEventListener("click", () => {
-  pressKey(resetBtn);
-  currentInput = "";
-  previousInput = "";
-  operator = "";
-  updateDisplay();
-});
-
-delBtn.addEventListener("click", () => {
-  pressKey(delBtn);
-  currentInput = currentInput.slice(0, -1);
-  updateDisplay();
-});
-
+// Handle calculation when equal button is clicked
 equalBtn.addEventListener("click", () => {
-  pressKey(equalBtn);
-  if (previousInput && currentInput && operator) {
-    calculate();
-    operator = "";
-    updateDisplay();
+  try {
+    const result = eval(expressionCalc);
+    resultEl.value = result;
+    expressionDisplay = result.toString();
+    expressionCalc = result.toString();
+  } catch (e) {
+    resultEl.value = "Error";
+    expressionDisplay = "";
+    expressionCalc = "";
   }
 });
 
-function handleNumber(value) {
-  if (value === "." && currentInput.includes(".")) return;
-  currentInput += value;
-}
+// Handle delete button click (remove last character)
+delBtn.addEventListener("click", () => {
+  expressionDisplay = expressionDisplay.slice(0, -1);
+  expressionCalc = expressionCalc.slice(0, -1);
+  resultEl.value = expressionDisplay;
+});
 
-function handleOperator(value) {
-  if (["+", "-", "x", "/"].includes(value)) {
-    if (currentInput === "") return;
-    if (previousInput && operator) {
-      calculate();
-    } else {
-      previousInput = currentInput;
-    }
-    operator = value;
-    currentInput = "";
-  }
-}
-
-function calculate() {
-  const prev = parseFloat(previousInput);
-  const curr = parseFloat(currentInput);
-  if (isNaN(prev) || isNaN(curr)) return;
-
-  let result = 0;
-  switch (operator) {
-    case "+":
-      result = prev + curr;
-      break;
-    case "-":
-      result = prev - curr;
-      break;
-    case "x":
-      result = prev * curr;
-      break;
-    case "/":
-      result = prev / curr;
-      break;
-  }
-
-  currentInput = result.toString();
-  previousInput = "";
-}
-
-function updateDisplay() {
-  expressionEl.textContent = `${previousInput} ${operator}`;
-  resultEl.textContent = currentInput || "0";
-
-  // Kalau ada previousInput + operator, kasih animasi aktif
-  if (previousInput && operator) {
-    displayContainer.classList.add("is-active");
-  } else {
-    displayContainer.classList.remove("is-active");
-  }
-}
-
-function pressKey(button) {
-  button.classList.add("is-pressed");
-  setTimeout(() => {
-    button.classList.remove("is-pressed");
-  }, 100);
-}
+// Handle reset button click (clear all)
+resetBtn.addEventListener("click", () => {
+  expressionDisplay = "";
+  expressionCalc = "";
+  resultEl.value = "";
+});
